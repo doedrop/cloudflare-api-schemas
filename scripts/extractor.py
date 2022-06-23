@@ -123,6 +123,11 @@ def extract_schemas(
         # TODO: Do we have additional ways to verify the integrity?
         assert len(docs_info['sections']) == len(api_schemas)
 
+    meta = {
+        '_generated_on': datetime.utcnow().isoformat(),
+        '_generated_from': app_url,
+    } if append_meta else {}
+
     if output_path:
         output_path = Path(output_path)
         if remove_existing and output_path.exists():
@@ -134,17 +139,10 @@ def extract_schemas(
             with open(file_path, 'w') as json_file:
                 json.dump({
                     **schema,
-                    **({
-                        '_generated_on': datetime.utcnow().isoformat(),
-                        '_generated_from': app_url,
-                    } if append_meta else {}),
+                    **meta,
                 }, json_file, indent=4)
 
-    if append_meta:
-        # TODO: Do we have a way to extract the version from the original app bundle?
-        api_schemas['_generated_on'] = datetime.utcnow().isoformat()
-        api_schemas['_generated_from'] = app_url
-
+    api_schemas.update(meta)
     return api_schemas
 
 
