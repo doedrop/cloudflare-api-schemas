@@ -124,6 +124,7 @@ def extract_schemas(
         assert len(docs_info['sections']) == len(api_schemas)
 
     meta = {
+        # TODO: Does the original app bundle have some version? Would be great to find it ;)
         '_generated_on': datetime.utcnow().isoformat(),
         '_generated_from': app_url,
     } if append_meta else {}
