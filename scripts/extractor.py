@@ -1,7 +1,9 @@
 import os
 import re
+import sys
 import json
 import shutil
+import logging
 import requests
 
 from typing import Optional, Dict
@@ -18,6 +20,12 @@ __all__ = [
     'extract_schemas', 'CLOUDFLARE_DOCS_URL', 'CLOUDFLARE_SCHEMAS_URL',
 ]
 
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s'))
+log.addHandler(handler)
+
 CLOUDFLARE_DOCS_URL = os.environ.get('NX_CLOUDFLARE_DOCS_URL', 'https://api.cloudflare.com/')
 CLOUDFLARE_SCHEMAS_URL = os.environ.get('NX_CLOUDFLARE_SCHEMAS_URL', f'{CLOUDFLARE_DOCS_URL}schemas/v4/')
 
@@ -31,23 +39,30 @@ def _fetch_text(
     cache_path: Optional[str] = None,
     invalidate: bool = False
 ) -> str:
+    log.info('Fetching %s', url)
     if cache_path and not invalidate:
         if os.path.exists(cache_path):
+            log.info('Reading cache from %s', cache_path)
             with open(cache_path) as cache_file:
                 return cache_file.read()
     plain_text = requests.get(url).text
     if cache_path:
+        log.info('Writing cache to %s', cache_path)
         with open(cache_path, 'w') as cache_file:
             cache_file.write(plain_text)
     return plain_text
 
 
 def _process_docs(text: str, *, base_url: str) -> Dict:
+    log.info('Processing HTML docs...')
     tree = etree.fromstring(text, parser=etree.HTMLParser(huge_tree=True, remove_comments=True))
-    return {
+    result = {
         'sections': tree.xpath('//article[contains(@class, "api-section")]/header/h2/text()'),
         'app_url': urljoin(base_url, tree.xpath('//script[contains(@src, "apidocs-static/app-")]/@src')[0]),
     }
+    log.info('Sections found: %d', len(result['sections']))
+    log.info('App bundle URL: %s', result['app_url'])
+    return result
 
 
 class _PyVisitor(NodeVisitor):
@@ -86,6 +101,7 @@ class _PyVisitor(NodeVisitor):
 
 
 def _process_app(code: str) -> Dict:
+    log.info('Processing app bundle...')
     result = {}
     visitor, obj_pos = _PyVisitor(), 0
     while section := RE_APP_SECTION.search(code, pos=obj_pos):
@@ -99,6 +115,7 @@ def _process_app(code: str) -> Dict:
                 .replace('/', '.')
                 .replace('-', '_')
             )
+            log.debug('Found %s', py_obj['id'])
             result[py_id] = py_obj
     return result
 
@@ -112,6 +129,7 @@ def extract_schemas(
     app_url: Optional[str] = None,
     base_url: Optional[str] = None,
 ) -> Dict:
+    log.info('Extracting schemas...')
     docs_info = {}
     if not app_url:
         base_url = base_url or CLOUDFLARE_DOCS_URL
@@ -120,6 +138,7 @@ def extract_schemas(
 
     api_schemas = _process_app(_fetch_text(app_url))
     if verify and docs_info:
+        log.info('Checking integrity...')
         # TODO: Do we have additional ways to verify the integrity?
         assert len(docs_info['sections']) == len(api_schemas)
 
@@ -132,11 +151,14 @@ def extract_schemas(
     if output_path:
         output_path = Path(output_path)
         if remove_existing and output_path.exists():
+            log.info('Deleting directory %s (--remove-existing)', output_path)
             shutil.rmtree(output_path)
 
+        log.info('Serializing schemas to %s', output_path)
         for _, schema in api_schemas.items():
             file_path = output_path / schema['id'].replace(CLOUDFLARE_SCHEMAS_URL, '')
             os.makedirs(file_path.parent, exist_ok=True)
+            log.debug('Writing %s', file_path)
             with open(file_path, 'w') as json_file:
                 json.dump({
                     **schema,
@@ -148,6 +170,10 @@ def extract_schemas(
 
 
 if __name__ == '__main__':
-    all_schemas = extract_schemas(output_path='../schemas/', remove_existing=True)
-    with open('../schemas/schemas.json', 'w') as schemas_file:
+    schemas_dir = Path(__file__).resolve().parent.parent / 'schemas'
+    all_schemas = extract_schemas(output_path=schemas_dir, remove_existing=True)
+
+    schemas_path = schemas_dir / 'schemas.json'
+    log.info('Serializing registry to %s', schemas_path)
+    with open(schemas_path, 'w') as schemas_file:
         json.dump(all_schemas, schemas_file, indent=4)
