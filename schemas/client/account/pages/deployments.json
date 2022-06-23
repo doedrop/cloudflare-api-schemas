@@ -1,0 +1,607 @@
+{
+    "id": "https://api.cloudflare.com/schemas/v4/client/account/pages/deployments.json",
+    "title": "Pages Deployment",
+    "description": "A Pages deployment is a published build for a commit on Pages",
+    "cfExtendedDescription": "**For more detailed documentation on using the API for Pages see the [Pages docs](https://developers.cloudflare.com/pages/).**",
+    "type": "object",
+    "cfDeprecations": {
+        "logs_v1_deprecated": {
+            "id": "logs_v1_deprecated",
+            "description": "Use \"Get deployment logs\" instead: https://api.cloudflare.com/#pages-deployment-get-deployment-logs.",
+            "eol": "2022-09-19",
+            "display": true
+        }
+    },
+    "links": [
+        {
+            "title": "Get deployments",
+            "description": "Fetch a list of deployments from a project",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments",
+            "method": "GET",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-get-deployments",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments",
+            "curl": "curl -X GET \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n    \"short_id\": \"f64788e9\",\n    \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n    \"project_name\": \"ninjakittens\",\n    \"environment\": \"preview\",\n    \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n    \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"modified_on\": \"2021-03-09T00:58:59.045655\",\n    \"aliases\": [\n      \"https://branchname.projectname.pages.dev\"\n    ],\n    \"latest_stage\": {\n      \"name\": \"deploy\",\n      \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n      \"ended_on\": \"2021-03-09T00:58:59.045655\",\n      \"status\": \"success\"\n    },\n    \"env_vars\": {\n      \"BUILD_VERSION\": {\n        \"value\": \"3.3\"\n      },\n      \"ENV\": {\n        \"value\": \"STAGING\"\n      }\n    },\n    \"deployment_trigger\": {\n      \"type\": \"ad_hoc\",\n      \"metadata\": {\n        \"branch\": \"main\",\n        \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n        \"commit_message\": \"Update index.html\"\n      }\n    },\n    \"stages\": [\n      {\n        \"name\": \"queued\",\n        \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n        \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n        \"status\": \"active\"\n      },\n      {\n        \"name\": \"initialize\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"clone_repo\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"build\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"deploy\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      }\n    ],\n    \"build_config\": {\n      \"build_command\": \"npm run build\",\n      \"destination_dir\": \"build\",\n      \"root_dir\": \"/\",\n      \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n      \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n    },\n    \"source\": {\n      \"type\": \"github\",\n      \"config\": {\n        \"owner\": \"cloudflare\",\n        \"repo_name\": \"ninjakittens\",\n        \"production_branch\": \"main\",\n        \"pr_comments_enabled\": true,\n        \"deployments_enabled\": true\n      }\n    }\n  }\n}"
+        },
+        {
+            "title": "Get deployment info",
+            "description": "Fetch a deployment",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id",
+            "method": "GET",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-get-deployment-info",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id",
+            "curl": "curl -X GET \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n    \"short_id\": \"f64788e9\",\n    \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n    \"project_name\": \"ninjakittens\",\n    \"environment\": \"preview\",\n    \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n    \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"modified_on\": \"2021-03-09T00:58:59.045655\",\n    \"aliases\": [\n      \"https://branchname.projectname.pages.dev\"\n    ],\n    \"latest_stage\": {\n      \"name\": \"deploy\",\n      \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n      \"ended_on\": \"2021-03-09T00:58:59.045655\",\n      \"status\": \"success\"\n    },\n    \"env_vars\": {\n      \"BUILD_VERSION\": {\n        \"value\": \"3.3\"\n      },\n      \"ENV\": {\n        \"value\": \"STAGING\"\n      }\n    },\n    \"deployment_trigger\": {\n      \"type\": \"ad_hoc\",\n      \"metadata\": {\n        \"branch\": \"main\",\n        \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n        \"commit_message\": \"Update index.html\"\n      }\n    },\n    \"stages\": [\n      {\n        \"name\": \"queued\",\n        \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n        \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n        \"status\": \"active\"\n      },\n      {\n        \"name\": \"initialize\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"clone_repo\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"build\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"deploy\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      }\n    ],\n    \"build_config\": {\n      \"build_command\": \"npm run build\",\n      \"destination_dir\": \"build\",\n      \"root_dir\": \"/\",\n      \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n      \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n    },\n    \"source\": {\n      \"type\": \"github\",\n      \"config\": {\n        \"owner\": \"cloudflare\",\n        \"repo_name\": \"ninjakittens\",\n        \"production_branch\": \"main\",\n        \"pr_comments_enabled\": true,\n        \"deployments_enabled\": true\n      }\n    }\n  }\n}"
+        },
+        {
+            "title": "Get deployment stage logs",
+            "description": "Fetch deploy logs",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/:deployment_stage_name/logs",
+            "method": "GET",
+            "cfDeprecation": {
+                "id": "logs_v1_deprecated",
+                "description": "Use \"Get deployment logs\" instead: https://api.cloudflare.com/#pages-deployment-get-deployment-logs.",
+                "eol": "2022-09-19",
+                "display": true
+            },
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-get-deployment-stage-logs",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/:deployment_stage_name/logs",
+            "curl": "curl -X GET \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/:deployment_stage_name/logs\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"name\": \"build\",\n    \"started_on\": \"2021-04-20T19:35:58.238757Z\",\n    \"ended_on\": \"2021-04-20T19:36:06.38889Z\",\n    \"status\": \"success\",\n    \"start\": 0,\n    \"end\": 37,\n    \"total\": 37,\n    \"data\": [\n      {\n        \"id\": 15,\n        \"timestamp\": \"2021-04-20T19:35:59.0749819Z\",\n        \"message\": \"Installing dependencies\"\n      },\n      {\n        \"id\": 16,\n        \"timestamp\": \"2021-04-20T19:35:59.0931208Z\",\n        \"message\": \"Python version set to 2.7\"\n      },\n      {\n        \"id\": 17,\n        \"timestamp\": \"2021-04-20T19:36:02.2369501Z\",\n        \"message\": \"v12.18.0 is already installed.\"\n      },\n      {\n        \"id\": 18,\n        \"timestamp\": \"2021-04-20T19:36:02.6028886Z\",\n        \"message\": \"Now using node v12.18.0 (npm v6.14.4)\"\n      },\n      {\n        \"id\": 19,\n        \"timestamp\": \"2021-04-20T19:36:02.624555Z\",\n        \"message\": \"Started restoring cached build plugins\"\n      },\n      {\n        \"id\": 20,\n        \"timestamp\": \"2021-04-20T19:36:02.6340688Z\",\n        \"message\": \"Finished restoring cached build plugins\"\n      },\n      {\n        \"id\": 21,\n        \"timestamp\": \"2021-04-20T19:36:02.963095Z\",\n        \"message\": \"Attempting ruby version 2.7.1, read from environment\"\n      },\n      {\n        \"id\": 22,\n        \"timestamp\": \"2021-04-20T19:36:04.2236084Z\",\n        \"message\": \"Using ruby version 2.7.1\"\n      },\n      {\n        \"id\": 23,\n        \"timestamp\": \"2021-04-20T19:36:04.5450152Z\",\n        \"message\": \"Using PHP version 5.6\"\n      },\n      {\n        \"id\": 24,\n        \"timestamp\": \"2021-04-20T19:36:04.5740509Z\",\n        \"message\": \"5.2 is already installed.\"\n      },\n      {\n        \"id\": 25,\n        \"timestamp\": \"2021-04-20T19:36:04.577035Z\",\n        \"message\": \"Using Swift version 5.2\"\n      },\n      {\n        \"id\": 26,\n        \"timestamp\": \"2021-04-20T19:36:04.5771615Z\",\n        \"message\": \"Installing Hugo 0.54.0\"\n      },\n      {\n        \"id\": 27,\n        \"timestamp\": \"2021-04-20T19:36:05.4786868Z\",\n        \"message\": \"Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z\"\n      },\n      {\n        \"id\": 28,\n        \"timestamp\": \"2021-04-20T19:36:05.4794366Z\",\n        \"message\": \"Started restoring cached go cache\"\n      },\n      {\n        \"id\": 29,\n        \"timestamp\": \"2021-04-20T19:36:05.481977Z\",\n        \"message\": \"Finished restoring cached go cache\"\n      },\n      {\n        \"id\": 30,\n        \"timestamp\": \"2021-04-20T19:36:05.9049776Z\",\n        \"message\": \"go version go1.14.4 linux/amd64\"\n      },\n      {\n        \"id\": 31,\n        \"timestamp\": \"2021-04-20T19:36:05.9086053Z\",\n        \"message\": \"go version go1.14.4 linux/amd64\"\n      },\n      {\n        \"id\": 32,\n        \"timestamp\": \"2021-04-20T19:36:05.9163568Z\",\n        \"message\": \"Installing missing commands\"\n      },\n      {\n        \"id\": 33,\n        \"timestamp\": \"2021-04-20T19:36:05.9163934Z\",\n        \"message\": \"Verify run directory\"\n      },\n      {\n        \"id\": 34,\n        \"timestamp\": \"2021-04-20T19:36:05.9164636Z\",\n        \"message\": \"Executing user command: echo \\\"skipping build step: no build command specified\\\"\"\n      },\n      {\n        \"id\": 35,\n        \"timestamp\": \"2021-04-20T19:36:05.9165087Z\",\n        \"message\": \"skipping build step: no build command specified\"\n      },\n      {\n        \"id\": 36,\n        \"timestamp\": \"2021-04-20T19:36:05.917412Z\",\n        \"message\": \"Finished\"\n      }\n    ]\n  }\n}"
+        },
+        {
+            "title": "Get deployment logs",
+            "description": "Fetch deploy logs",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/logs",
+            "method": "GET",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-get-deployment-logs",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/logs",
+            "curl": "curl -X GET \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/history/logs\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"total\": 30,\n    \"includes_container_logs\": true,\n    \"data\": [\n      {\n        \"ts\": \"2021-04-20T19:35:29.0749819Z\",\n        \"line\": \"Cloning repository...\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"From https://github.com/cloudflare/example\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \" * branch            209c5bb11d89533f426b2f8469bcae12fdccf71b -> FETCH_HEAD\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"HEAD is now at 209c5bb Update index.html\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:30.0749819Z\",\n        \"line\": \"Success: Finished cloning repository files\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:59.0749819Z\",\n        \"line\": \"Installing dependencies\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:35:59.0931208Z\",\n        \"line\": \"Python version set to 2.7\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:02.2369501Z\",\n        \"line\": \"v12.18.0 is already installed.\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:02.6028886Z\",\n        \"line\": \"Now using node v12.18.0 (npm v6.14.4)\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:02.624555Z\",\n        \"line\": \"Started restoring cached build plugins\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:02.6340688Z\",\n        \"line\": \"Finished restoring cached build plugins\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:02.963095Z\",\n        \"line\": \"Attempting ruby version 2.7.1, read from environment\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:04.2236084Z\",\n        \"line\": \"Using ruby version 2.7.1\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:04.5450152Z\",\n        \"line\": \"Using PHP version 5.6\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:04.5740509Z\",\n        \"line\": \"5.2 is already installed.\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:04.577035Z\",\n        \"line\": \"Using Swift version 5.2\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:04.5771615Z\",\n        \"line\": \"Installing Hugo 0.54.0\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.4786868Z\",\n        \"line\": \"Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.4794366Z\",\n        \"line\": \"Started restoring cached go cache\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.481977Z\",\n        \"line\": \"Finished restoring cached go cache\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9049776Z\",\n        \"line\": \"go version go1.14.4 linux/amd64\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9086053Z\",\n        \"line\": \"go version go1.14.4 linux/amd64\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9163568Z\",\n        \"line\": \"Installing missing commands\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9163934Z\",\n        \"line\": \"Verify run directory\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9164636Z\",\n        \"line\": \"Executing user command: echo \\\"skipping build step: no build command specified\\\"\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.9165087Z\",\n        \"line\": \"skipping build step: no build command specified\"\n      },\n      {\n        \"ts\": \"2021-04-20T19:36:05.917412Z\",\n        \"line\": \"Finished\"\n      }\n    ]\n  }\n}"
+        },
+        {
+            "title": "Delete deployment",
+            "description": "Destroy a deployment",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id",
+            "method": "DELETE",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-delete-deployment",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id",
+            "curl": "curl -X DELETE \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"result\": null,\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": []\n}"
+        },
+        {
+            "title": "Create deployment",
+            "description": "Start a new deployment from production. The repo/account must have been authorized through the Pages UI dash before.",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments",
+            "method": "POST",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-create-deployment",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments",
+            "curl": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n    \"short_id\": \"f64788e9\",\n    \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n    \"project_name\": \"ninjakittens\",\n    \"environment\": \"preview\",\n    \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n    \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"modified_on\": \"2021-03-09T00:58:59.045655\",\n    \"aliases\": [\n      \"https://branchname.projectname.pages.dev\"\n    ],\n    \"latest_stage\": {\n      \"name\": \"deploy\",\n      \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n      \"ended_on\": \"2021-03-09T00:58:59.045655\",\n      \"status\": \"success\"\n    },\n    \"env_vars\": {\n      \"BUILD_VERSION\": {\n        \"value\": \"3.3\"\n      },\n      \"ENV\": {\n        \"value\": \"STAGING\"\n      }\n    },\n    \"deployment_trigger\": {\n      \"type\": \"ad_hoc\",\n      \"metadata\": {\n        \"branch\": \"main\",\n        \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n        \"commit_message\": \"Update index.html\"\n      }\n    },\n    \"stages\": [\n      {\n        \"name\": \"queued\",\n        \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n        \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n        \"status\": \"active\"\n      },\n      {\n        \"name\": \"initialize\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"clone_repo\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"build\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"deploy\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      }\n    ],\n    \"build_config\": {\n      \"build_command\": \"npm run build\",\n      \"destination_dir\": \"build\",\n      \"root_dir\": \"/\",\n      \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n      \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n    },\n    \"source\": {\n      \"type\": \"github\",\n      \"config\": {\n        \"owner\": \"cloudflare\",\n        \"repo_name\": \"ninjakittens\",\n        \"production_branch\": \"main\",\n        \"pr_comments_enabled\": true,\n        \"deployments_enabled\": true\n      }\n    }\n  }\n}"
+        },
+        {
+            "title": "Retry deployment",
+            "description": "Retry a previous deployment",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/retry",
+            "method": "POST",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-retry-deployment",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/retry",
+            "curl": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/retry\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n    \"short_id\": \"f64788e9\",\n    \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n    \"project_name\": \"ninjakittens\",\n    \"environment\": \"preview\",\n    \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n    \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"modified_on\": \"2021-03-09T00:58:59.045655\",\n    \"aliases\": [\n      \"https://branchname.projectname.pages.dev\"\n    ],\n    \"latest_stage\": {\n      \"name\": \"deploy\",\n      \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n      \"ended_on\": \"2021-03-09T00:58:59.045655\",\n      \"status\": \"success\"\n    },\n    \"env_vars\": {\n      \"BUILD_VERSION\": {\n        \"value\": \"3.3\"\n      },\n      \"ENV\": {\n        \"value\": \"STAGING\"\n      }\n    },\n    \"deployment_trigger\": {\n      \"type\": \"ad_hoc\",\n      \"metadata\": {\n        \"branch\": \"main\",\n        \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n        \"commit_message\": \"Update index.html\"\n      }\n    },\n    \"stages\": [\n      {\n        \"name\": \"queued\",\n        \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n        \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n        \"status\": \"active\"\n      },\n      {\n        \"name\": \"initialize\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"clone_repo\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"build\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"deploy\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      }\n    ],\n    \"build_config\": {\n      \"build_command\": \"npm run build\",\n      \"destination_dir\": \"build\",\n      \"root_dir\": \"/\",\n      \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n      \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n    },\n    \"source\": {\n      \"type\": \"github\",\n      \"config\": {\n        \"owner\": \"cloudflare\",\n        \"repo_name\": \"ninjakittens\",\n        \"production_branch\": \"main\",\n        \"pr_comments_enabled\": true,\n        \"deployments_enabled\": true\n      }\n    }\n  }\n}"
+        },
+        {
+            "title": "Rollback deployment",
+            "description": "Rollback the production deployment to a previous deploy. You can only rollback to succesful builds on production.",
+            "rel": "self",
+            "href": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/rollback",
+            "method": "POST",
+            "cfRequestHeaders": {
+                "type": "object",
+                "required": [
+                    "X-Auth-Email",
+                    "X-Auth-Key"
+                ],
+                "properties": {
+                    "X-Auth-Email": {
+                        "description": "Your Cloudflare email",
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "X-Auth-Key": {
+                        "description": "Your Cloudflare API key",
+                        "type": "string",
+                        "minLength": 45,
+                        "maxLength": 45,
+                        "example": "c2547eb745079dac9320b638f5e225cf483cc5cfdda41"
+                    }
+                }
+            },
+            "html_id": "pages-deployment-rollback-deployment",
+            "uri": "accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/rollback",
+            "curl": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/:account_id/pages/projects/:project_name/deployments/:deployment_id/rollback\" \\\n     -H \"X-Auth-Email: user@example.com\" \\\n     -H \"X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41\"",
+            "response": "{\n  \"success\": true,\n  \"errors\": [],\n  \"messages\": [],\n  \"result\": {\n    \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n    \"short_id\": \"f64788e9\",\n    \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n    \"project_name\": \"ninjakittens\",\n    \"environment\": \"preview\",\n    \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n    \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"modified_on\": \"2021-03-09T00:58:59.045655\",\n    \"aliases\": [\n      \"https://branchname.projectname.pages.dev\"\n    ],\n    \"latest_stage\": {\n      \"name\": \"deploy\",\n      \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n      \"ended_on\": \"2021-03-09T00:58:59.045655\",\n      \"status\": \"success\"\n    },\n    \"env_vars\": {\n      \"BUILD_VERSION\": {\n        \"value\": \"3.3\"\n      },\n      \"ENV\": {\n        \"value\": \"STAGING\"\n      }\n    },\n    \"deployment_trigger\": {\n      \"type\": \"ad_hoc\",\n      \"metadata\": {\n        \"branch\": \"main\",\n        \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n        \"commit_message\": \"Update index.html\"\n      }\n    },\n    \"stages\": [\n      {\n        \"name\": \"queued\",\n        \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n        \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n        \"status\": \"active\"\n      },\n      {\n        \"name\": \"initialize\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"clone_repo\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"build\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      },\n      {\n        \"name\": \"deploy\",\n        \"started_on\": null,\n        \"ended_on\": null,\n        \"status\": \"idle\"\n      }\n    ],\n    \"build_config\": {\n      \"build_command\": \"npm run build\",\n      \"destination_dir\": \"build\",\n      \"root_dir\": \"/\",\n      \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n      \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n    },\n    \"source\": {\n      \"type\": \"github\",\n      \"config\": {\n        \"owner\": \"cloudflare\",\n        \"repo_name\": \"ninjakittens\",\n        \"production_branch\": \"main\",\n        \"pr_comments_enabled\": true,\n        \"deployments_enabled\": true\n      }\n    }\n  }\n}"
+        }
+    ],
+    "cfLinkErrors": {
+        "8000000": "An unknown error occurred",
+        "8000001": "A project already exists for this repo",
+        "8000002": "A project with this name already exists",
+        "8000003": "Invalid project name",
+        "8000004": "Account not authorized for the requested repo",
+        "8000005": "Required field missing",
+        "8000006": "Unable to parse request",
+        "8000007": "Project not found",
+        "8000008": "No installation found",
+        "8000009": "Deployment not found",
+        "8000010": "User is not authorized for provided GitHub Installation ID",
+        "8000011": "User has no linked GitHub accounts matching the provided username",
+        "8000012": "User has no linked GitHub repositories matching the provided name",
+        "8000013": "Authorization failed",
+        "8000014": "Deployment type not found",
+        "8000015": "Domain is invalid",
+        "8000016": "Unicode domains are not supported",
+        "8000017": "An operation is already in progress for this domain",
+        "8000018": "Domain is unavailable",
+        "8000019": "Project has reached the maximum number of allowed domains",
+        "8000020": "No deployment stage found for the provided name",
+        "8000021": "Domain not found",
+        "8000022": "Invalid PATCH operation requested",
+        "8000023": "Attempt to add duplicate environment variable, or replace or delete nonexistent variable",
+        "8000024": "Invalid list options provided",
+        "8000025": "Domain is not registered",
+        "8000026": "Coming soon",
+        "8000027": "Too many projects",
+        "8000028": "Must delete custom domains before deleting project",
+        "8000029": "Subdomain is unavailable",
+        "8000030": "Subdomain is blocked",
+        "8000031": "Unable to cancel completed deployment",
+        "8000032": "Unable to find a branch with the provided name",
+        "8000033": "Production branch must be set",
+        "8000034": "Cannot delete active production deployment",
+        "8000035": "Cannot delete aliased deployment",
+        "8000036": "Account has been blocked"
+    },
+    "html_id": "pages-deployment",
+    "object_definition": {
+        "_formatter": {
+            "jsonMediaType": {}
+        },
+        "all_props": {
+            "id": {
+                "type": "string",
+                "example": "\"f64788e9-fccd-4d4a-a28a-cb84f88f6\"",
+                "description": "Id of the deployment",
+                "readOnly": true
+            },
+            "short_id": {
+                "type": "string",
+                "example": "\"f64788e9\"",
+                "description": "Short Id (8 character) of the deployment",
+                "readOnly": true
+            },
+            "project_id": {
+                "type": "string",
+                "example": "\"7b162ea7-7367-4d67-bcde-1160995d5\"",
+                "description": "Id of the project",
+                "readOnly": true
+            },
+            "project_name": {
+                "type": "string",
+                "example": "\"ninjakittens\"",
+                "readOnly": true,
+                "description": "Name of the project"
+            },
+            "environment": {
+                "type": "string",
+                "example": "\"preview\"",
+                "description": "Type of deploy",
+                "readOnly": true,
+                "pattern": "preview|prediction"
+            },
+            "url": {
+                "type": "string",
+                "example": "\"https://f64788e9.ninjakittens.pages.dev\"",
+                "description": "The live URL to view this deployment",
+                "readOnly": true
+            },
+            "created_on": {
+                "type": "string",
+                "example": "\"2021-03-09T00:55:03.923456Z\"",
+                "description": "When the deployment was created",
+                "format": "date-time",
+                "readOnly": true
+            },
+            "modified_on": {
+                "type": "string",
+                "example": "\"2021-03-09T00:58:59.045655\"",
+                "description": "When the deployment was last modified",
+                "format": "date-time",
+                "readOnly": true
+            },
+            "aliases": {
+                "type": "array",
+                "example": "[\n  \"https://branchname.projectname.pages.dev\"\n]",
+                "description": "A list of alias URLs pointing to this deployment",
+                "readOnly": true
+            },
+            "latest_stage": {
+                "type": "object",
+                "example": "{\n  \"name\": \"deploy\",\n  \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n  \"ended_on\": \"2021-03-09T00:58:59.045655\",\n  \"status\": \"success\"\n}",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "\"deploy\"",
+                        "description": "The current build stage",
+                        "pattern": "queued|initialize|clone_repo|build|deploy"
+                    },
+                    "started_on": {
+                        "type": "string",
+                        "example": "\"2021-03-09T00:55:03.923456Z\"",
+                        "description": "When the stage started",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "ended_on": {
+                        "type": "string",
+                        "example": "\"2021-03-09T00:58:59.045655\"",
+                        "description": "When the stage ended",
+                        "format": "date-time",
+                        "readOnly": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "\"success\"",
+                        "description": "State of the current stage",
+                        "pattern": "success|idle|active|failure|canceled",
+                        "readOnly": true
+                    }
+                },
+                "readOnly": true,
+                "description": "The status of the deployment"
+            },
+            "env_vars": {
+                "type": "object",
+                "example": "{\n  \"BUILD_VERSION\": {\n    \"value\": \"3.3\"\n  },\n  \"ENV\": {\n    \"value\": \"STAGING\"\n  }\n}",
+                "description": "A dict of env variables to build this deploy",
+                "readOnly": true
+            },
+            "deployment_trigger": {
+                "type": "object",
+                "example": "{\n  \"type\": \"ad_hoc\",\n  \"metadata\": {\n    \"branch\": \"main\",\n    \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n    \"commit_message\": \"Update index.html\"\n  }\n}",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "\"ad_hoc\"",
+                        "description": "What caused the deployment",
+                        "pattern": "push|ad_hoc",
+                        "readOnly": true
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "example": "{\n  \"branch\": \"main\",\n  \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n  \"commit_message\": \"Update index.html\"\n}",
+                        "properties": {
+                            "branch": {
+                                "type": "string",
+                                "example": "\"main\"",
+                                "description": "Where the trigger happened",
+                                "readOnly": true
+                            },
+                            "commit_hash": {
+                                "type": "string",
+                                "example": "\"ad9ccd918a81025731e10e40267e11273a263421\"",
+                                "description": "Hash of the deployment trigger commit",
+                                "readOnly": true
+                            },
+                            "commit_message": {
+                                "type": "string",
+                                "example": "\"Update index.html\"",
+                                "description": "Message of the deployment trigger commit",
+                                "readOnly": true
+                            }
+                        },
+                        "description": "Additional info about the trigger"
+                    }
+                },
+                "description": "Info about what caused the deployment",
+                "readOnly": true
+            },
+            "stages": {
+                "type": "array",
+                "example": "[\n  {\n    \"name\": \"queued\",\n    \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n    \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n    \"status\": \"active\"\n  },\n  {\n    \"name\": \"initialize\",\n    \"started_on\": null,\n    \"ended_on\": null,\n    \"status\": \"idle\"\n  },\n  {\n    \"name\": \"clone_repo\",\n    \"started_on\": null,\n    \"ended_on\": null,\n    \"status\": \"idle\"\n  },\n  {\n    \"name\": \"build\",\n    \"started_on\": null,\n    \"ended_on\": null,\n    \"status\": \"idle\"\n  },\n  {\n    \"name\": \"deploy\",\n    \"started_on\": null,\n    \"ended_on\": null,\n    \"status\": \"idle\"\n  }\n]",
+                "readOnly": true,
+                "description": "List of past stages",
+                "items": {
+                    "description": "The status of the deployment",
+                    "type": "object",
+                    "readOnly": true,
+                    "properties": {
+                        "name": {
+                            "description": "The current build stage",
+                            "type": "string",
+                            "pattern": "queued|initialize|clone_repo|build|deploy",
+                            "example": "deploy"
+                        },
+                        "started_on": {
+                            "description": "When the stage started",
+                            "format": "date-time",
+                            "type": "string",
+                            "readOnly": true,
+                            "example": "2021-03-09T00:55:03.923456Z"
+                        },
+                        "ended_on": {
+                            "description": "When the stage ended",
+                            "format": "date-time",
+                            "type": "string",
+                            "readOnly": true,
+                            "example": "2021-03-09T00:58:59.045655"
+                        },
+                        "status": {
+                            "description": "State of the current stage",
+                            "type": "string",
+                            "pattern": "success|idle|active|failure|canceled",
+                            "readOnly": true,
+                            "example": "success"
+                        }
+                    }
+                }
+            },
+            "build_config": {
+                "type": "object",
+                "example": "{\n  \"build_command\": \"npm run build\",\n  \"destination_dir\": \"build\",\n  \"root_dir\": \"/\",\n  \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n  \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n}",
+                "properties": {
+                    "build_command": {
+                        "type": "string",
+                        "example": "\"npm run build\"",
+                        "description": "Command used to build project"
+                    },
+                    "destination_dir": {
+                        "type": "string",
+                        "example": "\"build\"",
+                        "description": "Output directory of the build"
+                    },
+                    "root_dir": {
+                        "type": "string",
+                        "example": "\"/\"",
+                        "description": "Directory to run the command"
+                    },
+                    "web_analytics_tag": {
+                        "type": "string",
+                        "example": "\"cee1c73f6e4743d0b5e6bb1a0bcaabcc\"",
+                        "description": "The classifying tag for analytics"
+                    },
+                    "web_analytics_token": {
+                        "type": "string",
+                        "example": "\"021e1057c18547eca7b79f2516f06o7x\"",
+                        "description": "The auth token for analytics"
+                    }
+                },
+                "readOnly": true,
+                "description": "Configs for the project build process"
+            },
+            "source": {
+                "type": "object",
+                "example": "{\n  \"type\": \"github\",\n  \"config\": {\n    \"owner\": \"cloudflare\",\n    \"repo_name\": \"ninjakittens\",\n    \"production_branch\": \"main\",\n    \"pr_comments_enabled\": true,\n    \"deployments_enabled\": true\n  }\n}",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "\"github\"",
+                        "description": "Project host type",
+                        "readOnly": true
+                    },
+                    "config": {
+                        "type": "object",
+                        "example": "{\n  \"owner\": \"cloudflare\",\n  \"repo_name\": \"ninjakittens\",\n  \"production_branch\": \"main\",\n  \"pr_comments_enabled\": true,\n  \"deployments_enabled\": true\n}",
+                        "properties": {
+                            "owner": {
+                                "type": "string",
+                                "example": "\"cloudflare\"",
+                                "description": "Project owner username",
+                                "readOnly": true
+                            },
+                            "repo_name": {
+                                "type": "string",
+                                "example": "\"ninjakittens\"",
+                                "description": "Project repository name"
+                            },
+                            "production_branch": {
+                                "type": "string",
+                                "example": "\"main\"",
+                                "description": "Project production branch name"
+                            },
+                            "pr_comments_enabled": {
+                                "type": "boolean",
+                                "example": "true",
+                                "description": "Enable Pages to comment on Pull Requests"
+                            },
+                            "deployments_enabled": {
+                                "type": "boolean",
+                                "example": "true",
+                                "description": "Toggle deployments on this repo"
+                            }
+                        }
+                    }
+                },
+                "readOnly": true,
+                "description": "Configs for the project source"
+            }
+        },
+        "required_props": [],
+        "optional_props": [
+            "id",
+            "short_id",
+            "project_id",
+            "project_name",
+            "environment",
+            "url",
+            "created_on",
+            "modified_on",
+            "aliases",
+            "latest_stage",
+            "env_vars",
+            "deployment_trigger",
+            "stages",
+            "build_config",
+            "source"
+        ],
+        "objects": [],
+        "example": "{\n  \"id\": \"f64788e9-fccd-4d4a-a28a-cb84f88f6\",\n  \"short_id\": \"f64788e9\",\n  \"project_id\": \"7b162ea7-7367-4d67-bcde-1160995d5\",\n  \"project_name\": \"ninjakittens\",\n  \"environment\": \"preview\",\n  \"url\": \"https://f64788e9.ninjakittens.pages.dev\",\n  \"created_on\": \"2021-03-09T00:55:03.923456Z\",\n  \"modified_on\": \"2021-03-09T00:58:59.045655\",\n  \"aliases\": [\n    \"https://branchname.projectname.pages.dev\"\n  ],\n  \"latest_stage\": {\n    \"name\": \"deploy\",\n    \"started_on\": \"2021-03-09T00:55:03.923456Z\",\n    \"ended_on\": \"2021-03-09T00:58:59.045655\",\n    \"status\": \"success\"\n  },\n  \"env_vars\": {\n    \"BUILD_VERSION\": {\n      \"value\": \"3.3\"\n    },\n    \"ENV\": {\n      \"value\": \"STAGING\"\n    }\n  },\n  \"deployment_trigger\": {\n    \"type\": \"ad_hoc\",\n    \"metadata\": {\n      \"branch\": \"main\",\n      \"commit_hash\": \"ad9ccd918a81025731e10e40267e11273a263421\",\n      \"commit_message\": \"Update index.html\"\n    }\n  },\n  \"stages\": [\n    {\n      \"name\": \"queued\",\n      \"started_on\": \"2021-06-03T15:38:15.608194Z\",\n      \"ended_on\": \"2021-06-03T15:39:03.134378Z\",\n      \"status\": \"active\"\n    },\n    {\n      \"name\": \"initialize\",\n      \"started_on\": null,\n      \"ended_on\": null,\n      \"status\": \"idle\"\n    },\n    {\n      \"name\": \"clone_repo\",\n      \"started_on\": null,\n      \"ended_on\": null,\n      \"status\": \"idle\"\n    },\n    {\n      \"name\": \"build\",\n      \"started_on\": null,\n      \"ended_on\": null,\n      \"status\": \"idle\"\n    },\n    {\n      \"name\": \"deploy\",\n      \"started_on\": null,\n      \"ended_on\": null,\n      \"status\": \"idle\"\n    }\n  ],\n  \"build_config\": {\n    \"build_command\": \"npm run build\",\n    \"destination_dir\": \"build\",\n    \"root_dir\": \"/\",\n    \"web_analytics_tag\": \"cee1c73f6e4743d0b5e6bb1a0bcaabcc\",\n    \"web_analytics_token\": \"021e1057c18547eca7b79f2516f06o7x\"\n  },\n  \"source\": {\n    \"type\": \"github\",\n    \"config\": {\n      \"owner\": \"cloudflare\",\n      \"repo_name\": \"ninjakittens\",\n      \"production_branch\": \"main\",\n      \"pr_comments_enabled\": true,\n      \"deployments_enabled\": true\n    }\n  }\n}",
+        "title": "Pages Deployment",
+        "description": "A Pages deployment is a published build for a commit on Pages"
+    },
+    "_generated_on": "2022-06-23T18:27:26.093262",
+    "_generated_from": "https://api.cloudflare.com/apidocs-static/app-15eee93638a35d88ae02.js"
+}
