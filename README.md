@@ -1,3 +1,5 @@
+**DEPRECATED, OFFICIAL SCHEMAS WERE EXPOSED: https://api.cloudflare.com/schemas.json**
+
 # cloudflare-api-schemas
 Cloudflare API JSON Schemas (+extraction tool)
 
